@@ -1,6 +1,6 @@
 import requests
 import os
-from requests.exceptions import HTTPError
+from requests.exceptions import HTTPError, ConnectionError
 from dotenv import load_dotenv
 
 
@@ -90,7 +90,7 @@ def main():
             return count_clicks(user_url)
         return shorten_link(TOKEN, user_url)
     except HTTPError as ex:
-        return ex
+        return f"Ошибка \n\n {ex}"
     
 
 
