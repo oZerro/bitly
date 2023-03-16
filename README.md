@@ -31,8 +31,12 @@ Python 3 уже должен быть установлен
  `pip install -r requirements.txt`  
 
 7. Создайте файл **.env** в вашей деректории проекта.  
+<<<<<<< HEAD
 - `type nul > .env` - для Windows;
 - `touch файл.txt` - для Linux и MacOS.
+=======
+`type nul > .env`
+>>>>>>> d24bdfaf38b58bac6df434478a5f7beca7de3ffc
 
 8. Откройте файл **env** в любом текстовом редакторе и добавьте ваш токен - сохраните.  
 Строка будет выглядеть так:  
@@ -42,8 +46,11 @@ Python 3 уже должен быть установлен
 Для запуска перейдите в директорию проекта и выполните команду в консоли:    
 `python bitly.py`  
 
+<<<<<<< HEAD
 Если все сделали правильно - увидите такое сообщение.
 ![](https://github.com/oZerro/bitly/blob/main/img/23.jpg?raw=true)
 
+=======
+>>>>>>> d24bdfaf38b58bac6df434478a5f7beca7de3ffc
 
 
