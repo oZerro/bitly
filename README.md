@@ -10,7 +10,7 @@ Python 3 уже должен быть установлен
 
 2. Создать ваш личный токен [тык сюда](https://app.bitly.com/settings/api/) и сохраните его.  
 Выглядит он так: 4420a9fef71911865d8004568eb642714645f82e  
-![](img\qwe.jpg)
+![](https://github.com/oZerro/bitly/blob/main/img/qwe.jpg?raw=true)
 
 3. Клонируйте репозиторий с github - для этого выполните в консоли:  
 `git clone https://github.com/oZerro/bitly.git`
