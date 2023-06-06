@@ -8,18 +8,24 @@ from dotenv import load_dotenv
 LINK = "https://api-ssl.bitly.com/v4"
 
 
-def shorten_link(headers, url: str):
-    data = {"long_url": url}
-    link = LINK + "/shorten"
-    response = requests.post(link, headers=headers, json=data)
+def shorten_link(token, url: str):
+    headers = {
+        'Authorization': f'Bearer {token}'
+    }
+    start_url = {"long_url": url}
+    link = f'{LINK}/shorten'
+    response = requests.post(link, headers=headers, json=start_url)
     response.raise_for_status()
 
     return response.json()['link']
 
 
-def count_clicks(headers, bitlink):
+def count_clicks(token, bitlink):
+    headers = {
+        'Authorization': f'Bearer {token}'
+    }
     bitlink = urlparse(bitlink)
-    bitlink = bitlink[1] + bitlink[2]
+    bitlink = f'{bitlink.netloc}{bitlink.path}'
     params = {
         'unit': 'month',
         'units': '-1' 
@@ -31,37 +37,37 @@ def count_clicks(headers, bitlink):
     return response.json()['total_clicks']
 
 
-def is_bitlink(headers, url):
-    url = urlparse(url)
-    url = url[1] + url[2]
-    try: 
-        link = f'{LINK}/bitlinks/{url}'
-        response = requests.get(link, headers=headers)
-        response.raise_for_status()
-        return True
-    except HTTPError:
-        return False
-
-
-def main():
-    user_url = input('Введите ссылку: ')
-    token = os.environ['BITLY_TOKEN']
+def is_bitlink(token, url):
     headers = {
         'Authorization': f'Bearer {token}'
     }
+    url = urlparse(url)
+    url = f'{url.netloc}{url.path}'
+    link = f'{LINK}/bitlinks/{url}'
+    response = requests.get(link, headers=headers)
+
+    return response.ok
+        
+
+def main():
+    load_dotenv()
+    user_url = input('Введите ссылку: ')
+    token = os.environ['BITLY_TOKEN']
 
     try:
-        if is_bitlink(headers, user_url):
-            sum_clik = count_clicks(headers, user_url)
-            return f'По вашей ссылке прошли {sum_clik} раз(а)'
+        if is_bitlink(token, user_url):
+            sum_click = count_clicks(token, user_url)
+            print(f'По вашей ссылке прошли {sum_click} раз(а)')
+            return 
         
-        return shorten_link(headers, user_url)
+        print(shorten_link(token, user_url))
+        return 
     except HTTPError as ex:
-        return f"\n Ошибка \n\n {ex}"
+        print(f"\n Ошибка \n\n {ex}")
+        return 
     
 
 if __name__ == '__main__':
-    load_dotenv()
-    print(main())
+    main()
     
     
