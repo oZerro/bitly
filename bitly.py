@@ -5,11 +5,11 @@ from urllib.parse import urlparse
 from requests.exceptions import HTTPError
 from dotenv import load_dotenv
 
-parser = argparse.ArgumentParser()
-parser.add_argument("link")
-args = parser.parse_args()
+# parser = argparse.ArgumentParser()
+# parser.add_argument("link")
+# args = parser.parse_args()
 
-print(args)
+# print(args)
 
 LINK = "https://api-ssl.bitly.com/v4"
 
